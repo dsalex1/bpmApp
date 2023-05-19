@@ -1,1 +1,1 @@
-{"name":"bpmapp","short_name":"bpmapp","start_url":"/","display":"standalone","background_color":"#ffffff","lang":"en","scope":"/"}
+{"name":"bpmapp","short_name":"bpmapp","start_url":"/bpmApp/","display":"standalone","background_color":"#ffffff","lang":"en","scope":"/bpmApp/"}

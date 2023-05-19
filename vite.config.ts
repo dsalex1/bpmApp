@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [vue(), VitePWA({ registerType: 'autoUpdate' })],
   build: {
-    outDir: 'docs'
+    outDir: 'docs',
   },
-  publicPath: "/bpmApp/"
+  base: '/bpmApp/',
 })
