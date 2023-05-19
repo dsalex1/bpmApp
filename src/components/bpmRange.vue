@@ -44,7 +44,7 @@
         height: 26px;
         width: 1px;
         top: -3px;
-        background-color: blue;
+        background-color: rgba(0, 0, 255, 0.25);
       "
       :style="{
         left:
