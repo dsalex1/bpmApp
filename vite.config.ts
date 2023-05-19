@@ -7,5 +7,6 @@ export default defineConfig({
   plugins: [vue(), VitePWA({ registerType: 'autoUpdate' })],
   build: {
     outDir: 'docs'
-  }
+  },
+  publicPath: "/bpmApp/"
 })
