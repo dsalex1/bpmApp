@@ -30,16 +30,18 @@
     </tbody>
   </table>
   <div style="position: fixed; bottom: 0; width: 100%">
-    <span class="form-check-inline form-switch ps-2 mb-2">
+    <div
+      class="form-check-inline form-switch ps-2 mb-2 d-flex align-items-center justify-content-center"
+    >
       <label for="flexSwitchCheckDefault">4/4</label>
       <input
         class="form-check-input mx-2"
-        style="height: 20px; width: 40px"
+        style="height: 30px; width: 60px"
         type="checkbox"
         v-model="isWaltzTime"
       />
       <label for="flexSwitchCheckDefault">3/4</label>
-    </span>
+    </div>
     <div
       class="btn btn-secondary w-100 d-flex justify-content-center align-items-center"
       @click="

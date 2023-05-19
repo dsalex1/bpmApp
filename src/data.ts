@@ -9,19 +9,19 @@ export const danceData = [{
 }, {
     name: "Tango",
     time: "4/4",
-    bpms: [128, 4]
+    bpms: [128, 8]
 }, {
     name: "Slowfox",
     time: "4/4",
-    bpms: [116, 4]
+    bpms: [116, 8]
 }, {
     name: "Quickstep",
     time: "4/4",
-    bpms: [102, 4]
+    bpms: [102, 8]
 }, {
     name: "Foxtrott",
     time: "4/4",
-    bpms: [92, 4]
+    bpms: [92, 8]
 }, {
     name: "Discofox",
     time: "4/4",
@@ -33,15 +33,15 @@ export const danceData = [{
 }, {
     name: "Rumba",
     time: "4/4",
-    bpms: [104, 4]
+    bpms: [104, 8]
 }, {
     name: "ChaChaCha",
     time: "4/4",
-    bpms: [124, 4]
+    bpms: [124, 8]
 }, {
     name: "Samba",
     time: "4/4",
-    bpms: [100, 4]
+    bpms: [100, 8]
 }, {
     name: "Shuffle",
     time: "4/4",
@@ -50,6 +50,6 @@ export const danceData = [{
 {
     name: "Blues",
     time: "4/4",
-    bpms: [84, 4]
+    bpms: [84, 8]
 }
 ] as const
