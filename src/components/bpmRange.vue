@@ -20,6 +20,7 @@
         font-weight: bold;
       "
       :style="{ left: ((bpm - start) / (end - start)) * 100 + '%' }"
+      class="text-dark"
     >
       {{ bpm }}
     </div>
@@ -44,7 +45,7 @@
         height: 26px;
         width: 1px;
         top: -3px;
-        background-color: rgba(0, 0, 255, 0.25);
+        background-color: rgba(0, 0, 255, 0.4);
       "
       :style="{
         left:
@@ -75,11 +76,11 @@ const { start, end, average, variance, current } = toRefs(props);
 .grad {
   background: linear-gradient(
     to right,
-    red 0%,
-    yellow 25%,
-    rgb(0, 200, 0) 50%,
-    yellow 75%,
-    red 100%
+    hsl(0, 100%, 35%) 0%,
+    hsl(60, 100%, 35%) 25%,
+    hsl(120, 100%, 35%) 50%,
+    hsl(60, 100%, 35%) 75%,
+    hsl(0, 100%, 35%)
   );
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <!-- bootstrap table-->
   <div class="h2 my-4 d-flex justify-content-center">
-    BPM: <span v-if="!tappedBpm">/</span>
+    BPM:&nbsp;<span v-if="!tappedBpm">/</span>
     <span v-else
       >{{ Math.round(tappedBpm)
       }}{{
@@ -31,16 +31,68 @@
   </table>
   <div style="position: fixed; bottom: 0; width: 100%">
     <div
-      class="form-check-inline form-switch ps-2 mb-2 d-flex align-items-center justify-content-center"
+      class="btn-group w-100"
+      role="group"
+      aria-label="Basic radio toggle button group"
+      v-if="!isWaltzTime"
     >
-      <label for="flexSwitchCheckDefault">4/4</label>
       <input
-        class="form-check-input mx-2"
-        style="height: 30px; width: 60px"
-        type="checkbox"
-        v-model="isWaltzTime"
+        type="radio"
+        class="btn-check"
+        value="All"
+        v-model="tag"
+        id="tagAll"
       />
-      <label for="flexSwitchCheckDefault">3/4</label>
+      <label class="btn btn-outline-secondary" for="tagAll">All</label>
+      <input
+        type="radio"
+        class="btn-check"
+        value="Latin"
+        v-model="tag"
+        id="tagLatin"
+      />
+      <label class="btn btn-outline-secondary" for="tagLatin">Latin</label>
+      <input
+        type="radio"
+        class="btn-check"
+        value="Standard"
+        v-model="tag"
+        id="tagStandard"
+      />
+      <label class="btn btn-outline-secondary" for="tagStandard"
+        >Standard</label
+      >
+      <input
+        type="radio"
+        class="btn-check"
+        value="EDM"
+        v-model="tag"
+        id="tagEDM"
+      />
+      <label class="btn btn-outline-secondary" for="tagEDM">EDM</label>
+    </div>
+    <div class="mb-2 d-flex justify-content-center">
+      <div
+        class="m-0 p-0 form-check-inline form-switch d-flex align-items-center"
+      >
+        <label for="flexSwitchCheckDefault">4/4</label>
+        <input
+          class="form-check-input mx-2"
+          style="height: 30px; width: 60px"
+          type="checkbox"
+          v-model="isWaltzTime"
+        />
+        <label for="flexSwitchCheckDefault">3/4</label>
+      </div>
+      <div class="m-3 p-0 form-check-inlined d-flex align-items-center">
+        <input
+          class="form-check-input mx-2"
+          style="height: 30px; width: 30px"
+          type="checkbox"
+          v-model="shouldSort"
+        />
+        <label for="flexSwitchCheckDefault">Sort</label>
+      </div>
     </div>
     <div
       class="btn btn-secondary w-100 d-flex justify-content-center align-items-center"
@@ -53,7 +105,7 @@
     </div>
     <div
       class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
-      style="height: 100px"
+      style="height: 150px"
       @click="bpmTap"
     >
       Tap BPM
@@ -62,17 +114,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import bpmRange from "./components/bpmRange.vue";
 import { danceData } from "./data";
 
 const isWaltzTime = ref(false);
+watch(isWaltzTime, () => {
+  if (isWaltzTime.value) {
+    tag.value = "All";
+  }
+});
+const shouldSort = ref(false);
+const tag = ref<"All" | "Latin" | "Standard" | "EDM">("All");
 
 const sortedDanceData = computed(() =>
   danceData
     .filter((s) => (isWaltzTime.value ? s.time == "3/4" : s.time == "4/4"))
+    .filter((s) => (tag.value == "All" ? true : s.tags.includes(tag.value)))
     .sort((a, b) => {
-      if (!tappedBpm.value) return a.bpms[0] - b.bpms[0];
+      if (!tappedBpm.value || !shouldSort.value) return a.bpms[0] - b.bpms[0];
       function getCloserValue(a: number) {
         if (!tappedBpm.value) return 0;
         const cmp1 =
