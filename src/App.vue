@@ -1,7 +1,15 @@
 <template>
   <!-- bootstrap table-->
   <div class="h2 my-4 d-flex justify-content-center">
-    BPM: {{ Math.round(tappedBpm || 0) || "/" }}
+    BPM: <span v-if="!tappedBpm">/</span>
+    <span v-else
+      >{{ Math.round(tappedBpm)
+      }}{{
+        tappedBpm < 100
+          ? "/" + Math.round(tappedBpm * 2)
+          : "/" + Math.round(tappedBpm / 2)
+      }}</span
+    >
   </div>
   <table class="table table-striped table-hover">
     <tbody>
@@ -9,7 +17,7 @@
         <td :width="isWaltzTime ? '150px' : '100px'" class="py-0 pe-0">
           {{ dance.name }}
         </td>
-        <td class="p-0" style="vertical-align: middle">
+        <td class="p-0 overflow-hidden" style="vertical-align: middle">
           <bpmRange
             :start="lowerLimit"
             :end="upperLimit"
@@ -61,12 +69,20 @@ const isWaltzTime = ref(false);
 const sortedDanceData = computed(() =>
   danceData
     .filter((s) => (isWaltzTime.value ? s.time == "3/4" : s.time == "4/4"))
-    .sort((a, b) =>
-      tappedBpm.value
-        ? Math.abs(tappedBpm.value - a.bpms[0]) / a.bpms[1] -
-          Math.abs(tappedBpm.value - b.bpms[0]) / b.bpms[1]
-        : a.bpms[0] - b.bpms[0]
-    )
+    .sort((a, b) => {
+      if (!tappedBpm.value) return a.bpms[0] - b.bpms[0];
+      function getCloserValue(a: number) {
+        if (!tappedBpm.value) return 0;
+        const cmp1 =
+          tappedBpm.value < 100 ? tappedBpm.value * 2 : tappedBpm.value / 2;
+        const cmp2 = tappedBpm.value;
+        return Math.abs(a - cmp1) < Math.abs(a - cmp2) ? cmp1 : cmp2;
+      }
+      return (
+        Math.abs(getCloserValue(a.bpms[0]) - a.bpms[0]) / a.bpms[1] -
+        Math.abs(getCloserValue(b.bpms[0]) - b.bpms[0]) / b.bpms[1]
+      );
+    })
 );
 
 const upperLimit = computed(

@@ -36,6 +36,24 @@
         left: ((current - start) / (end - start)) * 100 + '%',
       }"
     ></div>
+
+    <div
+      v-if="current"
+      style="
+        position: absolute;
+        height: 26px;
+        width: 1px;
+        top: -3px;
+        background-color: blue;
+      "
+      :style="{
+        left:
+          (((current < 100 ? current * 2 : current / 2) - start) /
+            (end - start)) *
+            100 +
+          '%',
+      }"
+    ></div>
   </div>
 </template>
 

@@ -29,7 +29,7 @@ export const danceData = [{
 }, {
     name: "Jive",
     time: "4/4",
-    bpms: [160, 16]
+    bpms: [150, 16]
 }, {
     name: "Rumba",
     time: "4/4",
