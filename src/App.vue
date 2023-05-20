@@ -107,6 +107,7 @@
       class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
       style="height: 150px"
       @click="bpmTap"
+      @touchstart="navigator.vibrate(1)"
     >
       Tap BPM
     </div>
@@ -117,6 +118,8 @@
 import { computed, ref, watch } from "vue";
 import bpmRange from "./components/bpmRange.vue";
 import { danceData } from "./data";
+
+const navigator = window.navigator;
 
 const isWaltzTime = ref(false);
 watch(isWaltzTime, () => {
@@ -191,4 +194,25 @@ function beginTimeout() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn-primary {
+  --bs-btn-bg: #0c3a80;
+  --bs-btn-border-color: #094aac;
+  --bs-btn-hover-bg: #073f92;
+  --bs-btn-hover-border-color: #073f92;
+  --bs-btn-active-bg: #073f92;
+  --bs-btn-active-border-color: #083c8b;
+  --bs-btn-disabled-bg: #133b77;
+  --bs-btn-disabled-border-color: #094aac;
+}
+.btn-secondary {
+  --bs-btn-bg: #4c5358;
+  --bs-btn-border-color: #4c5358;
+  --bs-btn-hover-bg: #43484d;
+  --bs-btn-hover-border-color: #383d41;
+  --bs-btn-active-bg: #383d41;
+  --bs-btn-active-border-color: #35393d;
+  --bs-btn-disabled-bg: #4c5358;
+  --bs-btn-disabled-border-color: #4c5358;
+}
+</style>
